@@ -1,11 +1,14 @@
-# Playbook to call role
-- name: Check hostname
+# Ansible version
+- name: Check version
   hosts: localhost
   #become: yes
 
   tasks:
 
-- name: Call Roles
-  hosts: servers
-  roles:
-   - hostname
+   - name: Check Ansible version
+     command: ansible --version
+     register: ansibleVersion
+
+   - name: Print version
+     debug:
+       msg: "Ansible Version: {{ ansibleVersion.stdout }}"
